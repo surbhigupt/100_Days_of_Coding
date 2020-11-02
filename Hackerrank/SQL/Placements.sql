@@ -1,0 +1,22 @@
+SELECT NAME
+FROM 
+(
+    SELECT S.ID,
+           S.NAME,
+           SP.SALARY AS SALARY,
+           F.FRIEND_ID,
+           FP.SALARY AS FRIEND_SALARY
+    FROM STUDENTS AS S
+    
+        LEFT JOIN FRIENDS AS F
+        ON S.ID = F.ID
+    
+        LEFT JOIN PACKAGES AS SP
+        ON S.ID = SP.ID
+    
+        LEFT JOIN PACKAGES AS FP
+        ON F.FRIEND_ID = FP.ID
+) AS X
+WHERE FRIEND_SALARY > SALARY
+ORDER BY FRIEND_SALARY
+;
